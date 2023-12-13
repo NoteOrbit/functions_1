@@ -106,8 +106,8 @@ def run(table_times):
     result = {"table_times": []}
 
     for table_name, times in table_times.items():
-        start_timestamp = times.get('start_timestamp')
-        end_timestamp = times.get('end_timestamp')
+        start_timestamp = times.get('start_datetime')
+        end_timestamp = times.get('end_datetime')
 
         if not start_timestamp or not end_timestamp or start_timestamp > end_timestamp:
             
@@ -138,16 +138,16 @@ def run(table_times):
             logging.warning(f"Missing timestamps: {missing_timestamps}")
             result['table_times'].append({
                 'table_name': table_name,
-                'missing_timestamps': missing_timestamps,
-                'start_timestamp': start_timestamp,
-                'end_timestamp': end_timestamp,
-                'length': len(missing_timestamps),
+                'missing_datetime': missing_timestamps,
+                'start_datetime': start_timestamp,
+                'end_datetime': end_timestamp,
+                'count_datetime': len(missing_timestamps),
                 'frequency': frequency
             })
         else:
             result['table_times'].append({
                 'table_name': table_name,
-                'missing_timestamps': []
+                'missing_datetime': []
             })
 
 
