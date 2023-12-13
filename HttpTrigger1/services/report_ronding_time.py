@@ -5,6 +5,38 @@ from ..repository.dbo_transactions import query_timestamp
 import logging
 
 def calculate_missing_timestamps(rows, frequency, start, end):
+
+    '''
+    sample parameter
+
+
+    rows = [
+        ['2021-01-01 00:00:00.000000'],
+        ['2021-01-01 00:05:00.000000'],
+        ['2021-01-01 00:10:00.000000'],
+        ['2021-01-01 00:15:00.000000'],
+        ['2021-01-01 00:20:00.000000'],
+        ['2021-01-01 00:25:00.000000'],
+        ['2021-01-01 00:30:00.000000'],
+        ...
+
+    ]
+    frequency = '5min'
+    start = '2021-01-01 00:00:00.000000'
+    end = '2021-01-01 00:00:00.000000'
+
+
+    return [
+        
+        '2021-01-01 00:00:00.000000',
+
+    ]
+    
+    
+    '''
+
+
+
     start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S.%f')
     end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S.%f')
     try:
@@ -35,6 +67,30 @@ def calculate_missing_timestamps(rows, frequency, start, end):
         
         
 def run(table_times):
+
+    '''
+    sample parameter
+
+
+    table_times = {
+        
+        'REGIONSUM': {
+            'start_timestamp': '2021-01-01 00:00:00.000000',
+            'end_timestamp': '2021-01-01 00:00:00.000000'
+        },
+        'PRICE': {
+            'start_timestamp': '2021-01-01 00:00:00.000000',
+            'end_timestamp': '2021-01-01 00:00:00.000000'
+        },
+        'INTERCONNECTORRES': {
+            'start_timestamp': '2021-01-01 00:00:00.000000',
+            'end_timestamp': '2021-01-01 00:00:00.000000'
+        },
+    
+    '''
+    
+
+
     table_column_map = {
         'REGIONSUM': ['SETTLEMENTDATE', '5min'],
         'PRICE': ['SETTLEMENTDATE', '5min'],
@@ -92,6 +148,38 @@ def run(table_times):
                 'table_name': table_name,
                 'missing_timestamps': []
             })
+
+
+
+    '''
+    sample result 
+
+    {
+        "table_times": [
+            {
+                "table_name": "REGIONSUM",
+                "missing_timestamps": [
+                    "2021-01-01T00:00:00.000000",
+                    "2021-01-01T00:05:00.000000",
+                    "2021-01-01T00:10:00.000000",
+                    "2021-01-01T00:15:00.000000",
+                    "2021-01-01T00:20:00.000000",
+                    "2021-01-01T00:25:00.000000",
+                    "2021-01-01T00:30:00.000000",
+                    "2021-01-01T00:35:00.000000",
+                    "2021-01-01T00:40:00.000000",
+                    "2021-01-01T00:45:00.000000",
+                    "2021-01-01T00:50:00.000000",
+                    "2021-01-01T00:55:00.000000"
+                ],
+                "start_timestamp": "2021-01-01 00:00:00.000000",
+                "end_timestamp": "2021-01-01 00:00:00.000000",
+                "length": 12,
+                "frequency": "5min"
+            },
+    
+    '''
+
 
 
 

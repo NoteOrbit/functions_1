@@ -3,7 +3,7 @@ import azure.functions as func
 from .common.database_Util import DatabaseUtil
 import os
 from dotenv import load_dotenv
-from .logic.report_ronding_time import run
+from .services.report_ronding_time import run
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
