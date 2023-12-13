@@ -54,11 +54,10 @@ def calculate_missing_timestamps(rows, frequency, start, end):
                 return [dt.isoformat() for dt in set(complete) - set(rows)]
             elif frequency == '30min':
                 round_down = lambda dt: dt - datetime.timedelta(minutes=dt.minute % 30, seconds=dt.second, microseconds=dt.microsecond)
-                rows = [round_down(row[0]) for row in rows]
+                rows = [round_down(row) for row in rows]
                 complete = pl.datetime_range(start, end, '30m', eager=True)
                 return [dt.isoformat() for dt in set(complete) - set(rows)]
             elif frequency == 'H':
-                rows = [row[0] for row in rows]
                 complete = pl.datetime_range(start, end, '1h', eager=True)
                 return [dt.isoformat() for dt in set(complete) - set(rows)]
             
@@ -133,6 +132,8 @@ def run(table_times):
             frequency = table_column_map[table_name][1]
             logging.info(f"Column: {column}")
             data = query_timestamp(column, table_name, start_timestamp, end_timestamp)
+            logging.info(f"Data: {data}")
+            logging.info(f"Frequency: {frequency}")
             missing_timestamps = calculate_missing_timestamps(data, frequency, start_timestamp, end_timestamp)
             logging.warning(f"Missing timestamps: {missing_timestamps}")
             result['table_times'].append({

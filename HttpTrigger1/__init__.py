@@ -1,10 +1,5 @@
-import logging
 import azure.functions as func
-from .common.database_Util import DatabaseUtil
-import os
-from dotenv import load_dotenv
 from .services.report_ronding_time import run
-
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     table_times = req.params.get('table_times')

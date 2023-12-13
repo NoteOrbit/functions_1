@@ -1,9 +1,6 @@
-import logging
-import azure.functions as func
 from .common.database_Util import DatabaseUtil
 import os
 from dotenv import load_dotenv
-
 
 
 load_dotenv()
