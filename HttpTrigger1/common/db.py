@@ -1,4 +1,4 @@
-from .common.database_Util import DatabaseUtil
+from .database_Util import DatabaseUtil
 import os
 from dotenv import load_dotenv
 
